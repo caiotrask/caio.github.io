@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Assinatura - DRK Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- Cabeçalho -->
+    <header class="bg-blue-600 text-white p-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold">DRK Store</h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#" class="hover:underline">Home</a></li>
+                    <li><a href="#contato" class="hover:underline">Discord</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Formulário de Assinatura -->
+    <section class="py-12" id="planos">
+        <div class="container mx-auto max-w-3xl p-8 bg-white rounded-lg shadow-lg">
+            <h2 class="text-3xl font-semibold text-center mb-6">Complete sua Assinatura</h2>
+
+            <!-- Formulário -->
+            <form action="/gerar-pix" method="POST" id="formAssinatura">
+                
+                <!-- Nome Completo -->
+                <div class="mb-6">
+                    <label for="nome" class="block text-sm font-medium text-gray-700">Nome Completo</label>
+                    <input type="text" id="nome" name="nome" class="mt-2 w-full p-3 border border-gray-300 rounded-lg" required>
+                </div>
+
+                <!-- E-mail -->
+                <div class="mb-6">
+                    <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
+                    <input type="email" id="email" name="email" class="mt-2 w-full p-3 border border-gray-300 rounded-lg" required>
+                </div>
+
+                <!-- Botão de Envio -->
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg mt-4 hover:bg-blue-700 transition duration-300">
+                    Gerar Chave Pix
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Detalhes do Pagamento via Pix -->
+    <section id="pix-details" class="hidden py-12 bg-gray-50">
+        <div class="container mx-auto max-w-3xl p-8 bg-white rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold text-center mb-6">Detalhes do Pagamento via Pix</h2>
+            
+            <!-- Instruções para Pix -->
+            <div class="text-lg mb-4">
+                <p>Por favor, faça o pagamento usando a chave Pix abaixo.</p>
+                <p>Após o pagamento, crie um ticket e mande o comprovante.</p>
+            </div>
+            
+            <!-- Imagem do QR Code -->
+            <div id="qrcode" class="mb-6 text-center">
+                <!-- Aqui você coloca o link para a imagem do QR Code -->
+                <img id="img-qrcode" src="https://cdn.discordapp.com/attachments/1320546931986010162/1321494445807636601/IMG_0621.jpg?ex=676d711c&is=676c1f9c&hm=b0060160494f51d686d526f9910332156332a567212c9028f36e8e7b17b12c4b&" alt="QR Code Pix" class="mx-auto" style="max-width: 200px;">
+            </div>
+
+            <!-- Instruções para o Pix -->
+            <div>
+                <p class="font-medium">Para efetuar o pagamento:</p>
+                <ul class="list-disc ml-6">
+                    <li>Acesse seu aplicativo bancário</li>
+                    <li>Escolha a opção Pix</li>
+                    <li>Selecione "Pagar com QR code"</li>
+                    <li>Leia o QR code</li>
+                    <li>Realize o pagamento</li>
+                </ul>
+            </div>
+
+            <!-- Aviso de Sucesso -->
+            <div id="sucesso-pagamento" class="mt-6 hidden">
+                <p class="text-lg text-green-600 font-semibold text-center">Pagamento confirmado! Seu acesso será liberado em breve.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="bg-gray-800 text-white text-center p-4 mt-12" id="contato">
+        <p>&copy; 2024 DRK Store. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Simulação de geração de chave Pix
+        document.getElementById('formAssinatura').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Simulando a chave Pix
+            setTimeout(function() {
+                // Exibe a seção de detalhes de pagamento
+                document.getElementById('pix-details').classList.remove('hidden');
+
+                // Chave Pix simulada
+                var chavePix = '1234 5678 9012 3456 7890 1234 5678';
+                document.getElementById('chave-pix').textContent = chavePix;
+
+                // Aqui você substitui pela URL da imagem do seu QR Code
+                var qrcodeImageUrl = "https://im.ge/i/img-qrcode.zbXbPG";  // Substitua pela URL da sua imagem do QR Code
+                document.getElementById('img-qrcode').src = qrcodeImageUrl;
+
+                // Após o pagamento ser feito, o sistema pode verificar e mostrar um sucesso
+                document.getElementById('sucesso-pagamento').classList.remove('hidden');
+            }, 1000); // Simula o tempo de resposta do servidor
+        })
+    </script>
+
+</body>
+</html>
